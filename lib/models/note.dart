@@ -1,25 +1,12 @@
-class Note {
-  int? id;
-  String title;
-  String description;
-  
-  
-  
-  Note({
-   this.id,required this.description, required this.title,
-  });
-   Map<String, dynamic> toMap() {
-    return {
-      'id': id,'title': title,'description': description,   
-    };
-  }
+//
+//  Generated file. Do not edit.
+//
 
-   factory Note.fromMap(Map<String, dynamic> map) {
-    return Note(
-      id: map['id'],
-      title: map['title'],
-      description: map['description'],
-    );
-  }
+import FlutterMacOS
+import Foundation
 
+import sqflite
+
+func RegisterGeneratedPlugins(registry: FlutterPluginRegistry) {
+  SqflitePlugin.register(with: registry.registrar(forPlugin: "SqflitePlugin"))
 }
