@@ -3,21 +3,21 @@ import 'dart:io';
 import 'package:path/path.dart' as path;
 import 'package:path_provider/path_provider.dart';
 import 'package:sqflite/sqflite.dart';
-//import 'package:tugassqllite/models/note.dart';
+import 'package:todo_list/models/note.dart';
 
-class dbhelpers {
-  static final dbhelpers instance = dbhelpers._();
+class DatabaseHelper {
+  static final DatabaseHelper instance = DatabaseHelper._();
   static Database? _database;
 
-  dbhelpers._();
+  DatabaseHelper._();
 
   Future<Database> get database async {
     if (_database != null) return _database!;
-    _database = await _initdb();
+    _database = await _initDatabase();
     return _database!;
   }
 
-  Future<Database> _initdb() async {
+  Future<Database> _initDatabase() async {
     Directory documentsDirectory = await getApplicationDocumentsDirectory();
     String pathString = path.join(documentsDirectory.path, 'todo_list.db');
 
@@ -30,5 +30,18 @@ class dbhelpers {
         );
       },
     );
+  }
+
+  Future<int> insert(Note note) async {
+    final db = await database;
+    return await db.insert('notes', note.toMap());
+  }
+
+  Future<List<Note>> getNotes() async {
+    final db = await database;
+    final List<Map<String, dynamic>> maps = await db.query('notes');
+    return List.generate(maps.length, (index) {
+      return Note.fromMap(maps[index]);
+    });
   }
 }
