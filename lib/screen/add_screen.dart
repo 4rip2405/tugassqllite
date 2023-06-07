@@ -1,10 +1,14 @@
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
+import 'package:todo_list/models/notes_operationd.dart';
 
 class AddScreen extends StatelessWidget {
   const AddScreen({super.key});
 
   @override
   Widget build(BuildContext context) {
+    late String titleText;
+    late String descriptionText;
 
     return Scaffold(
       backgroundColor: Colors.blueGrey,
@@ -39,7 +43,7 @@ class AddScreen extends StatelessWidget {
                 color: Colors.white,
               ),
               onChanged: (value) {
-                
+                titleText = value;
               },
             ),
             Expanded(
@@ -57,17 +61,20 @@ class AddScreen extends StatelessWidget {
                   color: Colors.white,
                 ),
                 onChanged: (value) {
-                  
+                  descriptionText = value;
                 },
               ),
             ),
             TextButton(
               onPressed: () {
+                context
+                    .read<NotesOperation>()
+                    .addNewNote(titleText, descriptionText);
                 Navigator.pop(context);
               },
               style: TextButton.styleFrom(
-                padding:
-                    const EdgeInsets.only(left: 30, right: 30, top: 10, bottom: 10),
+                padding: const EdgeInsets.only(
+                    left: 30, right: 30, top: 10, bottom: 10),
                 backgroundColor: Colors.white,
               ),
               child: const Text('Add Note',
