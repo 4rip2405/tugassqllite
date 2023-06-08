@@ -27,6 +27,22 @@ class NotesCard extends StatelessWidget {
             note.description,
             style: const TextStyle(fontSize: 17),
           ),
+          const SizedBox(height: 10),
+          Row(
+            mainAxisAlignment: MainAxisAlignment.end,
+            children: [
+              IconButton(
+                onPressed: () async {
+                  await DatabaseHelper.instance.delete(note);
+                  Provider.of<NotesOperation>(context, listen: false)
+                      .getNotesFromDatabase();
+                },
+                icon: Icon(Icons.delete, color: Colors.black),
+              ),
+            ],
+          ),
+        ],
+      ),
         ],
       ),
     );
