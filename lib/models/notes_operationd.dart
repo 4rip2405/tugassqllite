@@ -22,4 +22,11 @@ class NotesOperation with ChangeNotifier {
     _notes = notes;
     notifyListeners();
   }
+  Future<void> deleteNote(Note note) async {
+    await DatabaseHelper.instance.delete(note);
+    _notes.removeWhere((n) => n.id == note.id);
+    notifyListeners();
+  }
 }
+
+

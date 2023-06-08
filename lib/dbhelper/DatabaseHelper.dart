@@ -44,4 +44,12 @@ class DatabaseHelper {
       return Note.fromMap(maps[index]);
     });
   }
+  Future<int> delete(Note note) async {
+    final db = await database;
+    return await db.delete(
+      'notes',
+      where: 'id = ?',
+      whereArgs: [note.id],
+    );
+  }
 }
