@@ -1,5 +1,9 @@
 import 'package:flutter/material.dart';
+import 'package:todo_list/dbhelper/DatabaseHelper.dart';
 import 'package:todo_list/models/note.dart';
+import 'package:provider/provider.dart';
+import 'package:todo_list/models/notes_operationd.dart';
+
 
 class NotesCard extends StatelessWidget {
   final Note note;
@@ -41,8 +45,6 @@ class NotesCard extends StatelessWidget {
               ),
             ],
           ),
-        ],
-      ),
         ],
       ),
     );
