@@ -43,8 +43,17 @@ class NotesCard extends StatelessWidget {
                 },
                 icon: Icon(Icons.delete, color: Colors.black),
               ),
+              IconButton(
+                onPressed: () async {
+                  await DatabaseHelper.instance.edit(note);
+                  Provider.of<NotesOperation>(context, listen: false)
+                      .getNotesFromDatabase();
+                },
+                icon: Icon(Icons.settings, color: Colors.black),
+              ),
             ],
           ),
+          
         ],
       ),
     );

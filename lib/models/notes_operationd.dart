@@ -27,6 +27,15 @@ class NotesOperation with ChangeNotifier {
     _notes.removeWhere((n) => n.id == note.id);
     notifyListeners();
   }
+    Future<void> editNote(Note note) async {
+    await DatabaseHelper.instance.edit(note);
+    int index = _notes.indexWhere((n) => n.id == note.id);
+        if (index != -1) {
+      _notes[index] = note;
+      notifyListeners();
+    }
+
+  }
 }
 
 
