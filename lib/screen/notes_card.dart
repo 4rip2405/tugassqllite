@@ -3,6 +3,7 @@ import 'package:todo_list/dbhelper/DatabaseHelper.dart';
 import 'package:todo_list/models/note.dart';
 import 'package:provider/provider.dart';
 import 'package:todo_list/models/notes_operationd.dart';
+import 'package:todo_list/screen/edit_screen.dart';
 
 
 class NotesCard extends StatelessWidget {
@@ -42,14 +43,6 @@ class NotesCard extends StatelessWidget {
                       .getNotesFromDatabase();
                 },
                 icon: Icon(Icons.delete, color: Colors.black),
-              ),
-              IconButton(
-                onPressed: () async {
-                  await DatabaseHelper.instance.edit(note);
-                  Provider.of<NotesOperation>(context, listen: false)
-                      .getNotesFromDatabase();
-                },
-                icon: Icon(Icons.settings, color: Colors.black),
               ),
             ],
           ),
