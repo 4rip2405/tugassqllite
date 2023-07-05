@@ -53,4 +53,14 @@ class DatabaseHelper {
       whereArgs: [note.id],
     );
   }
+
+    Future<int> edit(Note note) async {
+    final db = await database;
+    return await db.update(
+      'notes',
+      note.toMap(),
+      where: 'id = ?',
+      whereArgs: [note.id],
+    );
+  }
 }
